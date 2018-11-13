@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		433FABEDA399E706A35C7571 /* Pods_proteins.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838339202F2E45A7A2E87396 /* Pods_proteins.framework */; };
+		78372AC5219B0B3400690E2C /* ligands.txt in Resources */ = {isa = PBXBuildFile; fileRef = 78372AC4219B0B3400690E2C /* ligands.txt */; };
+		78372AC7219B0D1000690E2C /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78372AC6219B0D1000690E2C /* TableViewController.swift */; };
 		9B02D7DD219ADDB500445622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02D7DC219ADDB500445622 /* AppDelegate.swift */; };
 		9B02D7DF219ADDB500445622 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02D7DE219ADDB500445622 /* ViewController.swift */; };
 		9B02D7E2219ADDB500445622 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B02D7E0219ADDB500445622 /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		78372AC4219B0B3400690E2C /* ligands.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ligands.txt; sourceTree = SOURCE_ROOT; };
+		78372AC6219B0D1000690E2C /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		838339202F2E45A7A2E87396 /* Pods_proteins.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_proteins.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B02D7D9219ADDB500445622 /* proteins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = proteins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B02D7DC219ADDB500445622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,8 +77,10 @@
 			children = (
 				9B02D7DC219ADDB500445622 /* AppDelegate.swift */,
 				9B02D7DE219ADDB500445622 /* ViewController.swift */,
+				78372AC6219B0D1000690E2C /* TableViewController.swift */,
 				9B02D7E0219ADDB500445622 /* Main.storyboard */,
 				9B02D7E6219ADDB500445622 /* Assets.xcassets */,
+				78372AC4219B0B3400690E2C /* ligands.txt */,
 				9B02D7E8219ADDB500445622 /* LaunchScreen.storyboard */,
 				9B02D7EB219ADDB500445622 /* Info.plist */,
 				9B02D7E3219ADDB500445622 /* proteins.xcdatamodeld */,
@@ -155,6 +161,7 @@
 				9B02D7EA219ADDB500445622 /* LaunchScreen.storyboard in Resources */,
 				9B02D7E7219ADDB500445622 /* Assets.xcassets in Resources */,
 				9B02D7E2219ADDB500445622 /* Main.storyboard in Resources */,
+				78372AC5219B0B3400690E2C /* ligands.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +220,7 @@
 				9B02D7E5219ADDB500445622 /* proteins.xcdatamodeld in Sources */,
 				9B02D7DF219ADDB500445622 /* ViewController.swift in Sources */,
 				9B02D7DD219ADDB500445622 /* AppDelegate.swift in Sources */,
+				78372AC7219B0D1000690E2C /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

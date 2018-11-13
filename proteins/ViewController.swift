@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     
     let context = LAContext()
     var error: NSError?
-    
+    var proteinsArr: [String] = []
     
     
     func showAlertController(_ message: String) {
@@ -59,11 +59,34 @@ class ViewController: UIViewController {
         // check if Touch ID is available
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             button.isHidden = false
+            
         }
+        
+        let fileURLProject = Bundle.main.path(forResource: "ligands", ofType: "txt")
+        var readStringProject = ""
+        do {
+            readStringProject = try String(contentsOfFile: fileURLProject!, encoding: String.Encoding.utf8)
+        } catch let error as NSError {
+            print("Failed reading from URL: \(String(describing: fileURLProject)), Error: " + error.localizedDescription)
+        }
+        proteinsArr = readStringProject.components(separatedBy: "\n")
+        print(proteinsArr.count)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToTableView" {
+            let destinationVC = segue.destination as! TableViewController
+            
+            destinationVC.params = proteinsArr
+        }
+    }
 }
+
+
+
+
 
