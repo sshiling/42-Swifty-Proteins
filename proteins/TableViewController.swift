@@ -7,38 +7,79 @@
 //
 
 import UIKit
+import CoreData
+import Alamofire
+import SwiftyJSON
+import SVProgressHUD
 
 class TableViewController: UITableViewController {
-
-    var params: [String] = []
+    
+    var data: [String] = []
+    var tempData: [String] = []
+    let url = "http://rest.rcsb.org/rest/ligands/"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tempData = data
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(params[indexPath.row])
-        performSegue(withIdentifier: "goToScene", sender: self)
+        SVProgressHUD.show()
+        let headers: HTTPHeaders = ["Accept": "application/json"]
+        Alamofire.request(self.url + tempData[indexPath.row], method: .get, headers: headers).responseJSON { response in
+            switch response.result {
+            case .success:
+                let parsedData = JSON(response.value!)
+                print(parsedData)
+                SVProgressHUD.dismiss()
+                self.performSegue(withIdentifier: "goToScene", sender: self)
+            case .failure:
+                SVProgressHUD.dismiss()
+                self.showAlertController("Error getting data")
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return params.count
+        return tempData.count
     }
-
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
-        if !params[indexPath.row].isEmpty{
-            cell.ligoldName.text = params[indexPath.row]
+        if !tempData[indexPath.row].isEmpty {
+            cell.ligoldName.text = tempData[indexPath.row]
         }
         return cell
     }
-
-
-
+    
+    func showAlertController(_ message: String) {
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
 }
+
+// MARK: - Search bar methods
+extension TableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if !searchBar.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            tempData = data.filter{$0.localizedCaseInsensitiveContains(searchBar.text!)}
+        } else {
+            tempData = data
+        }
+        tableView.reloadData()
+    }
+}
+
+
+
+
+
+
+

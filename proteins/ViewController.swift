@@ -81,7 +81,7 @@ class ViewController: UIViewController {
         if segue.identifier == "goToTableView" {
             let destinationVC = segue.destination as! TableViewController
             
-            destinationVC.params = proteinsArr
+            destinationVC.data = proteinsArr
         }
     }
 }
