@@ -154,6 +154,9 @@
                             <outlet property="delegate" destination="fGa-Yg-rqZ" id="3D8-Fu-Gwu"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="3OO-TX-Whi" kind="show" identifier="goToScene" id="6qC-MD-NoH"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ibw-vh-Q7l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
