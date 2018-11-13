@@ -10,9 +10,20 @@ import UIKit
 import LocalAuthentication
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var loginView: UITextField!
+    @IBOutlet weak var passwordView: UITextField!
+    @IBAction func loginButton(_ sender: Any) {
+        loginView.text = ""
+        passwordView.text = ""
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "goToTableView", sender: self)
+        }
+    }
+    
     let context = LAContext()
     var error: NSError?
+    
+    
     
     func showAlertController(_ message: String) {
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
@@ -24,6 +35,10 @@ class ViewController: UIViewController {
     
     @IBAction func authWithTouchID(_ sender: Any) {
         let reason = "Authenticate with Touch ID"
+        loginView.text = ""
+        passwordView.text = ""
+        loginView.resignFirstResponder()
+        passwordView.resignFirstResponder()
         context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason, reply:
             {(succes, error) in
                 if succes {
