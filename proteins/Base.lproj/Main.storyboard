@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="-882" y="29"/>
         </scene>
-        <!--View Controller-->
+        <!--Login-->
         <scene sceneID="pTC-cQ-TNA">
             <objects>
                 <viewController id="Gwe-Ix-sqV" customClass="ViewController" customModule="proteins" customModuleProvider="target" sceneMemberID="viewController">
@@ -37,9 +37,13 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="85r-8G-MrD">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rhh-Pc-xQM">
-                                <rect key="frame" x="164" y="318" width="46" height="30"/>
-                                <state key="normal" title="Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rhh-Pc-xQM">
+                                <rect key="frame" x="137" y="283" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="C0l-y8-9Ig"/>
+                                    <constraint firstAttribute="height" constant="100" id="uPM-vh-4GB"/>
+                                </constraints>
+                                <state key="normal" image="touchID">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -47,7 +51,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eu7-Uv-Sc2">
-                                <rect key="frame" x="100" y="187.5" width="175" height="100.5"/>
+                                <rect key="frame" x="100" y="162.5" width="175" height="100.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lFB-BH-S2c">
                                         <rect key="frame" x="0.0" y="0.0" width="175" height="30"/>
@@ -80,7 +84,7 @@
                         <constraints>
                             <constraint firstItem="eu7-Uv-Sc2" firstAttribute="centerX" secondItem="85r-8G-MrD" secondAttribute="centerX" id="7uw-6p-3LR"/>
                             <constraint firstItem="0l3-V0-b6S" firstAttribute="trailing" secondItem="85r-8G-MrD" secondAttribute="trailing" id="83R-ol-iB2"/>
-                            <constraint firstItem="rhh-Pc-xQM" firstAttribute="top" secondItem="eu7-Uv-Sc2" secondAttribute="bottom" constant="30" id="EPg-Zf-cFe"/>
+                            <constraint firstItem="rhh-Pc-xQM" firstAttribute="top" secondItem="eu7-Uv-Sc2" secondAttribute="bottom" constant="20" id="EPg-Zf-cFe"/>
                             <constraint firstItem="rhh-Pc-xQM" firstAttribute="centerX" secondItem="4Wa-vY-dss" secondAttribute="centerX" id="Fpg-gI-kLM"/>
                             <constraint firstItem="0l3-V0-b6S" firstAttribute="bottom" secondItem="85r-8G-MrD" secondAttribute="bottom" id="Siz-QI-DTf"/>
                             <constraint firstItem="85r-8G-MrD" firstAttribute="top" secondItem="0l3-V0-b6S" secondAttribute="top" id="bXr-AV-ldx"/>
@@ -89,7 +93,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0l3-V0-b6S"/>
                     </view>
-                    <navigationItem key="navigationItem" id="LT3-Q9-JIO"/>
+                    <navigationItem key="navigationItem" title="Login" id="LT3-Q9-JIO"/>
                     <connections>
                         <outlet property="button" destination="rhh-Pc-xQM" id="p3a-A7-7EJ"/>
                         <segue destination="fGa-Yg-rqZ" kind="show" identifier="goToTableView" id="pv1-5Y-j6t"/>
@@ -151,5 +155,6 @@
     </scenes>
     <resources>
         <image name="background" width="1000" height="650"/>
+        <image name="touchID" width="100" height="100"/>
     </resources>
 </document>
