@@ -28,7 +28,7 @@ class Atom {
     }
     
     func makeAtom() -> SCNNode {
-        let Atom = SCNSphere(radius: 1.70)
+        let Atom = SCNSphere(radius: 0.3)
         Atom.firstMaterial!.diffuse.contents = UIColor.flatBlue
         Atom.firstMaterial!.specular.contents = UIColor.white
         let atomScene = SCNNode(geometry: Atom)

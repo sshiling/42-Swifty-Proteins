@@ -48,7 +48,6 @@ class TableViewController: UITableViewController {
                     print(imagePath)
                     let fullText = try String(contentsOfFile: imagePath, encoding: String.Encoding.utf8)
                     print(fullText)
-                    SVProgressHUD.dismiss()
                     let textaArr = fullText.components(separatedBy: .newlines)
                     for line in textaArr {
                         if line.contains("ATOM"){
@@ -57,6 +56,7 @@ class TableViewController: UITableViewController {
                             self.atomData.append(newAtom.makeAtom())
                         }
                     }
+                    SVProgressHUD.dismiss()
                     self.performSegue(withIdentifier: "goToScene", sender: self)
                 } catch {
                     SVProgressHUD.dismiss()

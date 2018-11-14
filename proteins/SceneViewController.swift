@@ -21,11 +21,18 @@ class SceneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(sceneData)
-        sceneView.backgroundColor = UIColor.red
+        sceneView.backgroundColor = UIColor.white
         sceneView.allowsCameraControl = true
         sceneView.autoenablesDefaultLighting = true
         let scene = SCNScene()
-        scene.rootNode.addChildNode(sceneData[0])
+//        scene.rootNode.addChildNode(sceneData[0])
+//        sceneView.scene = scene
+//        print(sceneView.scene)
+        scene.rootNode.addChildNode(SCNNode())
+        scene.rootNode.name = "Test"
+        for node in sceneData {
+            scene.rootNode.addChildNode(node)
+        }
         sceneView.scene = scene
         print(sceneView.scene)
     }
