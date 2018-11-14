@@ -33,12 +33,11 @@ class SceneViewController: UIViewController {
         }
         print(cordData.count)
         for atom in cordData {
-           // var from = atom[0]
+            var from = atom[0]
             print(atom)
             for cord in 1...atom.count - 1 {
-//print(cord)
-//              let celinder = makeCylinder(positionStart: SCNVector3(from.x, from.y, from.z), positionEnd: SCNVector3([atom[cord].x, atom[cord].y, atom[cord].z]), radius: 0.1, color: UIColor.black, transparency: 0.1)
-//                scene.rootNode.addChildNode(celinder)
+              let celinder = makeCylinder(positionStart: SCNVector3(from.x, from.y, from.z), positionEnd: SCNVector3([atom[cord].x, atom[cord].y, atom[cord].z]), radius: 0.1, color: UIColor.black, transparency: 0.1)
+                scene.rootNode.addChildNode(celinder)
             }
         }
         //let celinder = makeCylinder(positionStart: SCNVector3([0.0,0.0, 0.0]), positionEnd: SCNVector3([1.0, 1.0, 1.0]), radius: 0.1, color: UIColor.black, transparency: 0.1)

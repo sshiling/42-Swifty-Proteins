@@ -38,7 +38,7 @@ class TableViewController: UITableViewController {
         
         atomData = []
         atomCord = []
-        coordinates = []
+        allCoord = []
         SVProgressHUD.show()
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -62,6 +62,7 @@ class TableViewController: UITableViewController {
                             self.atomData.append(newAtom.makeAtom())
                         }
                         else if line.contains("CONECT"){
+                            self.coordinates = []
                             let elem = line.components(separatedBy: " ").filter({!$0.isEmpty})
                             for i in 1...elem.count - 1{
                                let currConnect = self.atomCord[Int(elem[i])! - 1]
