@@ -33,6 +33,8 @@ class Atom {
         Atom.firstMaterial!.specular.contents = UIColor.white
         let atomScene = SCNNode(geometry: Atom)
         atomScene.position = SCNVector3Make(x, y, z)
+        
         return atomScene
     }
+
 }

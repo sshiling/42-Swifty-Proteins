@@ -23,6 +23,7 @@ class TableViewController: UITableViewController {
     var atomCord: [Atom] = []
     var coordinates:[(x: Float, y: Float, z: Float)] = []
     var allCoord = [[(x: Float, y: Float, z: Float)]]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

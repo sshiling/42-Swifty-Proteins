@@ -20,8 +20,6 @@ class SceneViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        print(sceneData)
-        print(cordData)
         sceneView.backgroundColor = UIColor.white
         sceneView.allowsCameraControl = true
         sceneView.autoenablesDefaultLighting = true
@@ -31,6 +29,7 @@ class SceneViewController: UIViewController {
         for node in sceneData {
             scene.rootNode.addChildNode(node)
         }
+
         print(cordData.count)
         for atom in cordData {
             var from = atom[0]
@@ -40,7 +39,6 @@ class SceneViewController: UIViewController {
                 scene.rootNode.addChildNode(celinder)
             }
         }
-        //let celinder = makeCylinder(positionStart: SCNVector3([0.0,0.0, 0.0]), positionEnd: SCNVector3([1.0, 1.0, 1.0]), radius: 0.1, color: UIColor.black, transparency: 0.1)
         sceneView.scene = scene
     }
 
@@ -48,7 +46,7 @@ class SceneViewController: UIViewController {
         super.viewDidAppear(animated)
         test.text = "hello"
     }
-
+    
     func makeCylinder(positionStart: SCNVector3, positionEnd: SCNVector3, radius: CGFloat , color: UIColor, transparency: CGFloat) -> SCNNode
     {
         let height = CGFloat(GLKVector3Distance(SCNVector3ToGLKVector3(positionStart), SCNVector3ToGLKVector3(positionEnd)))
