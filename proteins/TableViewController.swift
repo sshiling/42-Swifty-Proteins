@@ -21,7 +21,6 @@ class TableViewController: UITableViewController {
     var tempData: [String] = []
     var atomData: [SCNNode] = []
     var atomCord: [Atom] = []
-    var coordinates:[(x: Float, y: Float, z: Float)] = []
     var allCoord = [[(x: Float, y: Float, z: Float)]]()
     
     override func viewDidLoad() {
@@ -36,11 +35,12 @@ class TableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+    
         atomData = []
-        atomCord = []
         allCoord = []
+        
         SVProgressHUD.show()
+        
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             let fileURL = documentsURL.appendingPathComponent("ligolds.txt")
@@ -51,28 +51,26 @@ class TableViewController: UITableViewController {
         Alamofire.download("http://files.rcsb.org/ligands/view/\(tempData[indexPath.row])_ideal.pdb", to: destination).response { response in
             if response.error == nil, let imagePath = response.destinationURL?.path {
                 do {
-                    print(imagePath)
+                    var atomCord: [Atom] = []
                     let fullText = try String(contentsOfFile: imagePath, encoding: String.Encoding.utf8)
-                    print(fullText)
                     let textaArr = fullText.components(separatedBy: .newlines)
                     for line in textaArr {
                         if line.contains("ATOM"){
                             let elem = line.components(separatedBy: " ").filter({!$0.isEmpty})
                             let newAtom = Atom(elem[1], elem[6], elem[7], elem[8], elem[11])
-                            self.atomCord.append(newAtom)
+                            atomCord.append(newAtom)
                             self.atomData.append(newAtom.makeAtom())
                         }
                         else if line.contains("CONECT"){
-                            self.coordinates = []
+                           var coordinates:[(x: Float, y: Float, z: Float)] = []
                             let elem = line.components(separatedBy: " ").filter({!$0.isEmpty})
                             for i in 1...elem.count - 1{
-                               let currConnect = self.atomCord[Int(elem[i])! - 1]
-                                self.coordinates.append((x: currConnect.x, y: currConnect.y, z: currConnect.z))
+                               let currConnect = atomCord[Int(elem[i])! - 1]
+                                coordinates.append((x: currConnect.x, y: currConnect.y, z: currConnect.z))
                             }
-                            self.allCoord.append(self.coordinates)
+                            self.allCoord.append(coordinates)
                         }
                     }
-//                    print(self.allCoord)
                     SVProgressHUD.dismiss()
                     self.performSegue(withIdentifier: "goToScene", sender: self)
                 } catch {
