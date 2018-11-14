@@ -16,7 +16,6 @@ class TableViewController: UITableViewController {
     
     var data: [String] = []
     var tempData: [String] = []
-    let url = "http://rest.rcsb.org/rest/ligands/"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,18 +29,36 @@ class TableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         SVProgressHUD.show()
-        let headers: HTTPHeaders = ["Accept": "application/json"]
-        Alamofire.request(self.url + tempData[indexPath.row], method: .get, headers: headers).responseJSON { response in
-            switch response.result {
-            case .success:
-                let parsedData = JSON(response.value!)
-                print(parsedData)
-                SVProgressHUD.dismiss()
-                self.performSegue(withIdentifier: "goToScene", sender: self)
-            case .failure:
-                SVProgressHUD.dismiss()
-                self.showAlertController("Error getting data")
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let fileURL = documentsURL.appendingPathComponent("ligolds.txt")
+            
+            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
+        }
+        
+        Alamofire.download("http://files.rcsb.org/ligands/view/\(tempData[indexPath.row])_ideal.pdb", to: destination).response { response in
+            if response.error == nil, let imagePath = response.destinationURL?.path {
+                do {
+                    print(imagePath)
+                    let fullText = try String(contentsOfFile: imagePath, encoding: String.Encoding.utf8)
+                    print(fullText)
+                    SVProgressHUD.dismiss()
+                    self.performSegue(withIdentifier: "goToScene", sender: self)
+//                    let data = try Data(contentsOf: imagePath)
+//                    let attibutedString = try NSAttributedString(data: data, documentAttributes: nil)
+//                    let fullText = attibutedString.string
+//                    let readings = fullText.components(separatedBy: CharacterSet.newlines)
+//                    for line in readings { // do not use ugly C-style loops in Swift
+//                        let clientData = line.components(separatedBy: "\t")
+//                        dictClients["FirstName"] = "\(clientData)"
+//                        arrayClients.append(dictClients)
+                   // print(data)
+                } catch {
+                    SVProgressHUD.dismiss()
+                    print(error)
+                }
             }
         }
     }
