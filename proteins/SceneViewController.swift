@@ -18,7 +18,18 @@ class SceneViewController: UIViewController {
     var cordData = [[(x: Float, y: Float, z: Float)]]()
     var alreadyUsedAtoms = [(x: Float, y: Float, z: Float)]()
     
+    @IBAction func shareImage(_ sender: Any) {
+        let bounds = UIScreen.main.bounds
+        UIGraphicsBeginImageContextWithOptions(bounds.size, true, 0.0)
+        self.view.drawHierarchy(in: bounds, afterScreenUpdates: false)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        let activityViewController = UIActivityViewController(activityItems: [img!], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
+    }
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         sceneView.backgroundColor = UIColor.white

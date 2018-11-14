@@ -170,7 +170,7 @@
             </objects>
             <point key="canvasLocation" x="599" y="28"/>
         </scene>
-        <!--Scene View Controller-->
+        <!--Title-->
         <scene sceneID="Meg-Ea-Y3Y">
             <objects>
                 <viewController id="3OO-TX-Whi" customClass="SceneViewController" customModule="proteins" sceneMemberID="viewController">
@@ -198,6 +198,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Hhe-QT-My9"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="8kD-u9-D1j">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="FdK-mq-CKb">
+                            <connections>
+                                <action selector="shareImage:" destination="3OO-TX-Whi" id="MK9-sZ-lD9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="sceneView" destination="iOT-CH-KSf" id="ekb-FM-jJI"/>
                         <outlet property="test" destination="s9G-7M-30b" id="rdu-70-R8w"/>
