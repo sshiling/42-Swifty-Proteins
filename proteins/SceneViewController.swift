@@ -15,58 +15,97 @@ class SceneViewController: UIViewController {
     @IBOutlet weak var sceneView: SCNView!
     
     var sceneData: [SCNNode] = []
-    
+    var cordData = [[(x: Float, y: Float, z: Float)]]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(sceneData)
+//        print(sceneData)
+        print(cordData)
         sceneView.backgroundColor = UIColor.white
         sceneView.allowsCameraControl = true
         sceneView.autoenablesDefaultLighting = true
         let scene = SCNScene()
-//        scene.rootNode.addChildNode(sceneData[0])
-//        sceneView.scene = scene
-//        print(sceneView.scene)
         scene.rootNode.addChildNode(SCNNode())
         scene.rootNode.name = "Test"
         for node in sceneData {
             scene.rootNode.addChildNode(node)
         }
+        print(cordData.count)
+        for atom in cordData {
+           // var from = atom[0]
+            print(atom)
+            for cord in 1...atom.count - 1 {
+//print(cord)
+//              let celinder = makeCylinder(positionStart: SCNVector3(from.x, from.y, from.z), positionEnd: SCNVector3([atom[cord].x, atom[cord].y, atom[cord].z]), radius: 0.1, color: UIColor.black, transparency: 0.1)
+//                scene.rootNode.addChildNode(celinder)
+            }
+        }
+        //let celinder = makeCylinder(positionStart: SCNVector3([0.0,0.0, 0.0]), positionEnd: SCNVector3([1.0, 1.0, 1.0]), radius: 0.1, color: UIColor.black, transparency: 0.1)
         sceneView.scene = scene
-        print(sceneView.scene)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         test.text = "hello"
     }
-    
-    
-//    func sceneSetup() {
-//        let scene = SCNScene()
-//
-//        let ambientLightNode = SCNNode()
-//        ambientLightNode.light = SCNLight()
-//        ambientLightNode.light!.type = SCNLight.LightType.ambient
-//        ambientLightNode.light!.color = UIColor(white: 0.67, alpha: 1.0)
-//        scene.rootNode.addChildNode(ambientLightNode)
-//
-//        let omniLightNode = SCNNode()
-//        omniLightNode.light = SCNLight()
-//        omniLightNode.light!.type = SCNLight.LightType.omni
-//        omniLightNode.light!.color = UIColor(white: 0.75, alpha: 1.0)
-//        omniLightNode.position = SCNVector3Make(0, 50, 50)
-//        scene.rootNode.addChildNode(omniLightNode)
-//
-//        let cameraNode = SCNNode()
-//        cameraNode.camera = SCNCamera()
-//        cameraNode.position = SCNVector3Make(0, 0, 25)
-//        scene.rootNode.addChildNode(cameraNode)
-//
-//        sceneView.scene = scene
-//        scene.backgro = UIColor.blue
-//    }
 
-
+    func makeCylinder(positionStart: SCNVector3, positionEnd: SCNVector3, radius: CGFloat , color: UIColor, transparency: CGFloat) -> SCNNode
+    {
+        let height = CGFloat(GLKVector3Distance(SCNVector3ToGLKVector3(positionStart), SCNVector3ToGLKVector3(positionEnd)))
+        let startNode = SCNNode()
+        let endNode = SCNNode()
+        
+        startNode.position = positionStart
+        endNode.position = positionEnd
+        
+        let zAxisNode = SCNNode()
+        zAxisNode.eulerAngles.x = Float(CGFloat(M_PI_2))
+        
+        let cylinderGeometry = SCNCylinder(radius: radius, height: height)
+        cylinderGeometry.firstMaterial?.diffuse.contents = color
+        let cylinder = SCNNode(geometry: cylinderGeometry)
+        
+        cylinder.position.y = Float(-height/2)
+        zAxisNode.addChildNode(cylinder)
+        
+        let returnNode = SCNNode()
+        
+        if (positionStart.x > 0.0 && positionStart.y < 0.0 && positionStart.z < 0.0 && positionEnd.x > 0.0 && positionEnd.y < 0.0 && positionEnd.z > 0.0)
+        {
+            endNode.addChildNode(zAxisNode)
+            endNode.constraints = [ SCNLookAtConstraint(target: startNode) ]
+            returnNode.addChildNode(endNode)
+            
+        }
+        else if (positionStart.x < 0.0 && positionStart.y < 0.0 && positionStart.z < 0.0 && positionEnd.x < 0.0 && positionEnd.y < 0.0 && positionEnd.z > 0.0)
+        {
+            endNode.addChildNode(zAxisNode)
+            endNode.constraints = [ SCNLookAtConstraint(target: startNode) ]
+            returnNode.addChildNode(endNode)
+            
+        }
+        else if (positionStart.x < 0.0 && positionStart.y > 0.0 && positionStart.z < 0.0 && positionEnd.x < 0.0 && positionEnd.y > 0.0 && positionEnd.z > 0.0)
+        {
+            endNode.addChildNode(zAxisNode)
+            endNode.constraints = [ SCNLookAtConstraint(target: startNode) ]
+            returnNode.addChildNode(endNode)
+            
+        }
+        else if (positionStart.x > 0.0 && positionStart.y > 0.0 && positionStart.z < 0.0 && positionEnd.x > 0.0 && positionEnd.y > 0.0 && positionEnd.z > 0.0)
+        {
+            endNode.addChildNode(zAxisNode)
+            endNode.constraints = [ SCNLookAtConstraint(target: startNode) ]
+            returnNode.addChildNode(endNode)
+            
+        }
+        else
+        {
+            startNode.addChildNode(zAxisNode)
+            startNode.constraints = [ SCNLookAtConstraint(target: endNode) ]
+            returnNode.addChildNode(startNode)
+        }
+        
+        return returnNode
+    }
 }

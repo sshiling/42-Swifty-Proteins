@@ -14,12 +14,15 @@ import SVProgressHUD
 import SceneKit
 import ChameleonFramework
 
+
 class TableViewController: UITableViewController {
     
     var data: [String] = []
     var tempData: [String] = []
     var atomData: [SCNNode] = []
-    
+    var atomCord: [Atom] = []
+    var coordinates:[(x: Float, y: Float, z: Float)] = []
+    var allCoord = [[(x: Float, y: Float, z: Float)]]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +37,8 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         atomData = []
+        atomCord = []
+        coordinates = []
         SVProgressHUD.show()
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -53,9 +58,19 @@ class TableViewController: UITableViewController {
                         if line.contains("ATOM"){
                             let elem = line.components(separatedBy: " ").filter({!$0.isEmpty})
                             let newAtom = Atom(elem[1], elem[6], elem[7], elem[8], elem[11])
+                            self.atomCord.append(newAtom)
                             self.atomData.append(newAtom.makeAtom())
                         }
+                        else if line.contains("CONECT"){
+                            let elem = line.components(separatedBy: " ").filter({!$0.isEmpty})
+                            for i in 1...elem.count - 1{
+                               let currConnect = self.atomCord[Int(elem[i])! - 1]
+                                self.coordinates.append((x: currConnect.x, y: currConnect.y, z: currConnect.z))
+                            }
+                            self.allCoord.append(self.coordinates)
+                        }
                     }
+//                    print(self.allCoord)
                     SVProgressHUD.dismiss()
                     self.performSegue(withIdentifier: "goToScene", sender: self)
                 } catch {
@@ -70,6 +85,7 @@ class TableViewController: UITableViewController {
         if segue.identifier == "goToScene" {
             let destinationVC = segue.destination as! SceneViewController
             destinationVC.sceneData = atomData
+            destinationVC.cordData = allCoord
         }
     }
     
