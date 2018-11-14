@@ -7,21 +7,32 @@
 //
 
 import Foundation
+import SceneKit
+import ChameleonFramework
 
 class Atom {
     
     let atomNum : Int
-    let x : Double
-    let y : Double
-    let z : Double
+    var x : Float
+    let y : Float
+    let z : Float
     let atomName : String
     
     init(_ num: String, _ x: String, _ y: String, _ z: String, _ name: String) {
         
         self.atomName = name
         self.atomNum = Int(num)!
-        self.x = Double(x)!
-        self.y = Double(y)!
-        self.z = Double(z)!
+        self.x = Float(x)!
+        self.y = Float(y)!
+        self.z = Float(z)!
+    }
+    
+    func makeAtom() -> SCNNode {
+        let Atom = SCNSphere(radius: 1.70)
+        Atom.firstMaterial!.diffuse.contents = UIColor.flatBlue
+        Atom.firstMaterial!.specular.contents = UIColor.white
+        let atomScene = SCNNode(geometry: Atom)
+        atomScene.position = SCNVector3Make(x, y, z)
+        return atomScene
     }
 }

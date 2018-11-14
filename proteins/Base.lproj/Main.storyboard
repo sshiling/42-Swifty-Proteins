@@ -170,10 +170,10 @@
             </objects>
             <point key="canvasLocation" x="599" y="28"/>
         </scene>
-        <!--View Controller-->
+        <!--Scene View Controller-->
         <scene sceneID="Meg-Ea-Y3Y">
             <objects>
-                <viewController id="3OO-TX-Whi" sceneMemberID="viewController">
+                <viewController id="3OO-TX-Whi" customClass="SceneViewController" customModule="proteins" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="flx-BM-60H">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -181,6 +181,13 @@
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iOT-CH-KSf">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </sceneKitView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9G-7M-30b">
+                                <rect key="frame" x="152" y="124" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -191,6 +198,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Hhe-QT-My9"/>
                     </view>
+                    <connections>
+                        <outlet property="sceneView" destination="iOT-CH-KSf" id="ekb-FM-jJI"/>
+                        <outlet property="test" destination="s9G-7M-30b" id="rdu-70-R8w"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7xS-tz-3sP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
