@@ -16,6 +16,7 @@ class TableViewController: UITableViewController {
     
     var data: [String] = []
     var tempData: [String] = []
+    var atomData: [Atom] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,18 +44,17 @@ class TableViewController: UITableViewController {
                 do {
                     print(imagePath)
                     let fullText = try String(contentsOfFile: imagePath, encoding: String.Encoding.utf8)
-                    print(fullText)
                     SVProgressHUD.dismiss()
                     self.performSegue(withIdentifier: "goToScene", sender: self)
-//                    let data = try Data(contentsOf: imagePath)
-//                    let attibutedString = try NSAttributedString(data: data, documentAttributes: nil)
-//                    let fullText = attibutedString.string
-//                    let readings = fullText.components(separatedBy: CharacterSet.newlines)
-//                    for line in readings { // do not use ugly C-style loops in Swift
-//                        let clientData = line.components(separatedBy: "\t")
-//                        dictClients["FirstName"] = "\(clientData)"
-//                        arrayClients.append(dictClients)
-                   // print(data)
+                    let textaArr = fullText.components(separatedBy: .newlines)
+                    for line in textaArr {
+                        if line.contains("ATOM"){
+                            let elem = line.components(separatedBy: " ").filter({!$0.isEmpty})
+                            let newAtom = Atom(elem[1], elem[7], elem[8], elem[9], elem[11])
+                            self.atomData.append(newAtom)
+                        }
+                    }
+                    print(self.atomData.count)
                 } catch {
                     SVProgressHUD.dismiss()
                     print(error)

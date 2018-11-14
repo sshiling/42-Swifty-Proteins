@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		433FABEDA399E706A35C7571 /* Pods_proteins.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838339202F2E45A7A2E87396 /* Pods_proteins.framework */; };
+		780852D2219C39AC002C206F /* Atom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780852D1219C39AC002C206F /* Atom.swift */; };
 		78372AC5219B0B3400690E2C /* ligands.txt in Resources */ = {isa = PBXBuildFile; fileRef = 78372AC4219B0B3400690E2C /* ligands.txt */; };
 		78372AC7219B0D1000690E2C /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78372AC6219B0D1000690E2C /* TableViewController.swift */; };
 		78372AC9219B1A9700690E2C /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78372AC8219B1A9700690E2C /* TableViewCell.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		780852D1219C39AC002C206F /* Atom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atom.swift; sourceTree = "<group>"; };
 		78372AC4219B0B3400690E2C /* ligands.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ligands.txt; sourceTree = SOURCE_ROOT; };
 		78372AC6219B0D1000690E2C /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		78372AC8219B1A9700690E2C /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 		9B02D7DB219ADDB500445622 /* proteins */ = {
 			isa = PBXGroup;
 			children = (
+				780852D1219C39AC002C206F /* Atom.swift */,
 				9B02D7DC219ADDB500445622 /* AppDelegate.swift */,
 				9B02D7DE219ADDB500445622 /* ViewController.swift */,
 				78372AC6219B0D1000690E2C /* TableViewController.swift */,
@@ -224,6 +227,7 @@
 				9B02D7E5219ADDB500445622 /* proteins.xcdatamodeld in Sources */,
 				9B02D7DF219ADDB500445622 /* ViewController.swift in Sources */,
 				9B02D7DD219ADDB500445622 /* AppDelegate.swift in Sources */,
+				780852D2219C39AC002C206F /* Atom.swift in Sources */,
 				78372AC7219B0D1000690E2C /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

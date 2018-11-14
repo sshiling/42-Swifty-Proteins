@@ -178,12 +178,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iOT-CH-KSf">
-                                <rect key="frame" x="67" y="269" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iOT-CH-KSf">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </sceneKitView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Hhe-QT-My9" firstAttribute="bottom" secondItem="iOT-CH-KSf" secondAttribute="bottom" id="BOd-hF-73E"/>
+                            <constraint firstItem="Hhe-QT-My9" firstAttribute="trailing" secondItem="iOT-CH-KSf" secondAttribute="trailing" id="aog-FV-KtN"/>
+                            <constraint firstItem="iOT-CH-KSf" firstAttribute="leading" secondItem="Hhe-QT-My9" secondAttribute="leading" id="jfm-Q1-lhq"/>
+                            <constraint firstItem="iOT-CH-KSf" firstAttribute="top" secondItem="Hhe-QT-My9" secondAttribute="top" id="mPD-NP-Q3u"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Hhe-QT-My9"/>
                     </view>
                 </viewController>
