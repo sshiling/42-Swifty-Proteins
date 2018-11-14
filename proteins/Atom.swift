@@ -36,5 +36,4 @@ class Atom {
         
         return atomScene
     }
-
 }

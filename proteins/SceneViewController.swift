@@ -16,6 +16,7 @@ class SceneViewController: UIViewController {
     
     var sceneData: [SCNNode] = []
     var cordData = [[(x: Float, y: Float, z: Float)]]()
+    var alreadyUsedAtoms = [(x: Float, y: Float, z: Float)]()
     
     
     override func viewDidLoad() {
@@ -33,13 +34,22 @@ class SceneViewController: UIViewController {
         print(cordData.count)
         for atom in cordData {
             var from = atom[0]
+            alreadyUsedAtoms.append(from)
             print(atom)
             for cord in 1...atom.count - 1 {
-              let celinder = makeCylinder(positionStart: SCNVector3(from.x, from.y, from.z), positionEnd: SCNVector3([atom[cord].x, atom[cord].y, atom[cord].z]), radius: 0.1, color: UIColor.black, transparency: 0.1)
-                scene.rootNode.addChildNode(celinder)
+                if !checkIfAlreadyUsed(atomsArray: alreadyUsedAtoms, toSearch: atom[cord]) {
+                  let celinder = makeCylinder(positionStart: SCNVector3(from.x, from.y, from.z), positionEnd: SCNVector3([atom[cord].x, atom[cord].y, atom[cord].z]), radius: 0.1, color: UIColor.black, transparency: 0.1)
+                    scene.rootNode.addChildNode(celinder)
+                }
             }
         }
         sceneView.scene = scene
+    }
+    
+    func checkIfAlreadyUsed(atomsArray: [(x: Float, y: Float, z: Float)], toSearch: (x: Float, y: Float, z: Float)) -> Bool {
+        let (x1, x2, x3) = toSearch
+        for (v1, v2, v3) in atomsArray { if v1 == x1 && v2 == x2 && v3 == x3 { return true } }
+        return false
     }
 
     override func viewDidAppear(_ animated: Bool) {
