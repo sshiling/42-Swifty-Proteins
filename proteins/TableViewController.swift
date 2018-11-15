@@ -22,10 +22,23 @@ class TableViewController: UITableViewController {
     var allAtoms: [SCNNode] = []
     var allCoords = [[(x: Float, y: Float, z: Float)]]()
     
+    lazy var searchBar:UISearchBar = UISearchBar()
+    
+    @IBAction func randProtein(_ sender: UIBarButtonItem) {
+        getPDBDataAndShowProtein(proteinIndex: Int(arc4random_uniform(UInt32(filteredNames.count))))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         filteredNames = names
+        searchBar.searchBarStyle = UISearchBarStyle.prominent
+        searchBar.placeholder = " Search..."
+        searchBar.sizeToFit()
+        searchBar.isTranslucent = false
+        searchBar.backgroundImage = UIImage()
+        searchBar.delegate = self
+        navigationItem.titleView = searchBar
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,15 +59,13 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        SVProgressHUD.show()
         tableView.isUserInteractionEnabled = false
-        allAtoms = []
-        allCoords = []
         
-        getPDBDataAndShowProtein(proteinIndex: indexPath)
+        getPDBDataAndShowProtein(proteinIndex: indexPath.row)
     }
     
-    func getPDBDataAndShowProtein(proteinIndex indexPath: IndexPath) {
+    func getPDBDataAndShowProtein(proteinIndex index: Int) {
+        SVProgressHUD.show()
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             let fileURL = documentsURL.appendingPathComponent("ligolds.txt")
@@ -62,7 +73,7 @@ class TableViewController: UITableViewController {
             return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
         }
         
-        Alamofire.download("http://files.rcsb.org/ligands/view/\(filteredNames[indexPath.row])_ideal.pdb", to: destination).response { response in
+        Alamofire.download("http://files.rcsb.org/ligands/view/\(filteredNames[index])_ideal.pdb", to: destination).response { response in
             if response.error == nil, let imagePath = response.destinationURL?.path {
                 do {
                     var atomCord: [Atom] = []
@@ -85,7 +96,6 @@ class TableViewController: UITableViewController {
                             self.allCoords.append(coordinates)
                         }
                     }
-                    SVProgressHUD.dismiss()
                     self.performSegue(withIdentifier: "goToScene", sender: self)
                     self.tableView.isUserInteractionEnabled = true
                 } catch {
@@ -102,7 +112,10 @@ class TableViewController: UITableViewController {
             let destinationVC = segue.destination as! SceneViewController
             destinationVC.sceneData = allAtoms
             destinationVC.cordData = allCoords
+            allAtoms = []
+            allCoords = []
         }
+        SVProgressHUD.dismiss()
     }
     
     func showAlertController(_ message: String) {
