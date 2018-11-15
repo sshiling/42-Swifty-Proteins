@@ -63,7 +63,7 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
         
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 42)
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 35)
         scene.rootNode.addChildNode(cameraNode)
         
         sceneView.scene = scene
