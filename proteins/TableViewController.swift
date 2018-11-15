@@ -25,7 +25,13 @@ class TableViewController: UITableViewController {
     lazy var searchBar:UISearchBar = UISearchBar()
     
     @IBAction func randProtein(_ sender: UIBarButtonItem) {
-        getPDBDataAndShowProtein(proteinIndex: Int(arc4random_uniform(UInt32(filteredNames.count))))
+        if filteredNames.count != 0 {
+            getPDBDataAndShowProtein(proteinIndex: Int(arc4random_uniform(UInt32(filteredNames.count))))
+        } else {
+            let alert = UIAlertController(title: "There are no elements to choose from", message: "Please, change your search request or clear search field", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     override func viewDidLoad() {
@@ -43,6 +49,7 @@ class TableViewController: UITableViewController {
         let backgroundView = UIImageView(image: #imageLiteral(resourceName: "bg"))
         backgroundView.contentMode = .scaleAspectFill
         self.tableView.backgroundView = backgroundView
+        self.tableView.separatorStyle = .none
         
 
     }
@@ -123,8 +130,26 @@ class TableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToScene" {
             let destinationVC = segue.destination as! SceneViewController
-            destinationVC.sceneData = allAtoms
-            destinationVC.cordData = allCoords
+            let scene = SCNScene()
+            var alreadyUsedAtoms = [(x: Float, y: Float, z: Float)]()
+            
+            scene.rootNode.addChildNode(SCNNode())
+            scene.rootNode.name = "Test"
+            for node in allAtoms {
+                scene.rootNode.addChildNode(node)
+            }
+            for atom in allCoords {
+                let from = atom[0]
+                alreadyUsedAtoms.append(from)
+                for cord in 1...atom.count - 1 {
+                    if !checkIfAlreadyUsed(atomsArray: alreadyUsedAtoms, toSearch: atom[cord]) {
+                        let celinder = makeCylinder(positionStart: SCNVector3(from.x, from.y, from.z), positionEnd: SCNVector3([atom[cord].x, atom[cord].y, atom[cord].z]), radius: 0.1, color: UIColor.black, transparency: 0.1)
+                        scene.rootNode.addChildNode(celinder)
+                    }
+                }
+            }
+            destinationVC.scene = scene
+            
             allAtoms = []
             allCoords = []
         }
@@ -148,6 +173,75 @@ extension TableViewController: UISearchBarDelegate {
         }
         tableView.reloadData()
     }
+}
+
+// MARK: - Prepare to show protein methods
+extension TableViewController {
+    func checkIfAlreadyUsed(atomsArray: [(x: Float, y: Float, z: Float)], toSearch: (x: Float, y: Float, z: Float)) -> Bool {
+        let (x1, x2, x3) = toSearch
+        for (v1, v2, v3) in atomsArray { if v1 == x1 && v2 == x2 && v3 == x3 { return true } }
+        return false
+    }
+    
+    func makeCylinder(positionStart: SCNVector3, positionEnd: SCNVector3, radius: CGFloat , color: UIColor, transparency: CGFloat) -> SCNNode
+    {
+        let height = CGFloat(GLKVector3Distance(SCNVector3ToGLKVector3(positionStart), SCNVector3ToGLKVector3(positionEnd)))
+        let startNode = SCNNode()
+        let endNode = SCNNode()
+        
+        startNode.position = positionStart
+        endNode.position = positionEnd
+        
+        let zAxisNode = SCNNode()
+        zAxisNode.eulerAngles.x = Float(CGFloat(M_PI_2))
+        
+        let cylinderGeometry = SCNCylinder(radius: radius, height: height)
+        cylinderGeometry.firstMaterial?.diffuse.contents = color
+        let cylinder = SCNNode(geometry: cylinderGeometry)
+        
+        cylinder.position.y = Float(-height/2)
+        zAxisNode.addChildNode(cylinder)
+        
+        let returnNode = SCNNode()
+        
+        if (positionStart.x > 0.0 && positionStart.y < 0.0 && positionStart.z < 0.0 && positionEnd.x > 0.0 && positionEnd.y < 0.0 && positionEnd.z > 0.0)
+        {
+            endNode.addChildNode(zAxisNode)
+            endNode.constraints = [ SCNLookAtConstraint(target: startNode) ]
+            returnNode.addChildNode(endNode)
+            
+        }
+        else if (positionStart.x < 0.0 && positionStart.y < 0.0 && positionStart.z < 0.0 && positionEnd.x < 0.0 && positionEnd.y < 0.0 && positionEnd.z > 0.0)
+        {
+            endNode.addChildNode(zAxisNode)
+            endNode.constraints = [ SCNLookAtConstraint(target: startNode) ]
+            returnNode.addChildNode(endNode)
+            
+        }
+        else if (positionStart.x < 0.0 && positionStart.y > 0.0 && positionStart.z < 0.0 && positionEnd.x < 0.0 && positionEnd.y > 0.0 && positionEnd.z > 0.0)
+        {
+            endNode.addChildNode(zAxisNode)
+            endNode.constraints = [ SCNLookAtConstraint(target: startNode) ]
+            returnNode.addChildNode(endNode)
+            
+        }
+        else if (positionStart.x > 0.0 && positionStart.y > 0.0 && positionStart.z < 0.0 && positionEnd.x > 0.0 && positionEnd.y > 0.0 && positionEnd.z > 0.0)
+        {
+            endNode.addChildNode(zAxisNode)
+            endNode.constraints = [ SCNLookAtConstraint(target: startNode) ]
+            returnNode.addChildNode(endNode)
+            
+        }
+        else
+        {
+            startNode.addChildNode(zAxisNode)
+            startNode.constraints = [ SCNLookAtConstraint(target: endNode) ]
+            returnNode.addChildNode(startNode)
+        }
+        
+        return returnNode
+    }
+
 }
 
 
