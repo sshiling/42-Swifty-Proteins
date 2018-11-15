@@ -60,5 +60,9 @@
             </dict>
         </dict>
     </dict>
+    
+    <key>CFBundleURLTypes</key> <array> <dict> <key>CFBundleURLSchemes</key> <array> <string>fb1928299830622161</string> </array> </dict> </array> <key>FacebookAppID</key> <string>1928299830622161</string> <key>FacebookDisplayName</key> <string>SwiftyProteins</string>
+    
+    <key>LSApplicationQueriesSchemes</key> <array> <string>fbapi</string> <string>fb-messenger-share-api</string> <string>fbauth2</string> <string>fbshareextension</string> </array>
 </dict>
 </plist>

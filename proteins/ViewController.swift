@@ -8,12 +8,17 @@
 
 import UIKit
 import LocalAuthentication
+import FacebookLogin
+import FacebookCore
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class ViewController: UIViewController {
     
     let context = LAContext()
     var error: NSError?
     var proteinsArr: [String] = []
+    var dict : [String : AnyObject]!
     
     @IBOutlet weak var loginView: UITextField!
     @IBOutlet weak var passwordView: UITextField!
@@ -25,6 +30,33 @@ class ViewController: UIViewController {
             self.performSegue(withIdentifier: "goToTableView", sender: self)
         }
     }
+    
+    @IBOutlet weak var myFbButton: UIButton!
+    
+    @IBAction func myFbButton(_ sender: UIButton) {
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) -> Void in
+            if (error == nil){
+                let fbloginresult : FBSDKLoginManagerLoginResult = result!
+                // if user cancel the login
+                if (result?.isCancelled)!{
+                    return
+                }
+                if(fbloginresult.grantedPermissions.contains("email"))
+                {
+                    // Navigate to other view
+                    self.loginView.text = ""
+                    self.passwordView.text = ""
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "goToTableView", sender: self)
+                        FBSDKLoginManager().logOut()
+                    }
+                }
+            }
+        }
+    }
+    
+
     
     @IBOutlet weak var button: UIButton!
     
@@ -42,7 +74,6 @@ class ViewController: UIViewController {
                         self.performSegue(withIdentifier: "goToTableView", sender: self)
                         self.button.isEnabled = true
                     }
-                    
                 }
                 else {
                     self.showAlertController("Touch ID Authentication Failed")
@@ -58,8 +89,12 @@ class ViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()   
+        
         button.isHidden = true
+//        myFbButton.frame.width = 45
+        myFbButton.widthAnchor.constraint(equalToConstant: 175.0).isActive = true
+        myFbButton.heightAnchor.constraint(equalToConstant: 45.0).isActive = true
     
         // check if Touch ID is available
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
@@ -89,6 +124,8 @@ class ViewController: UIViewController {
         }
     }
 }
+
+
 
 
 

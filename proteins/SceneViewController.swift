@@ -11,7 +11,7 @@ import SceneKit
 import SwiftyJSON
 
 class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
-
+    
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var melt: UILabel!
     @IBOutlet weak var boil: UILabel!
