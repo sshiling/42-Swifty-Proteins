@@ -8,8 +8,6 @@
 
 import UIKit
 import CoreData
-import FacebookLogin
-import FacebookCore
 import FBSDKCoreKit
 import FBSDKLoginKit
 

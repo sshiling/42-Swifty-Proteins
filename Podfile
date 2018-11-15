@@ -12,5 +12,4 @@ target 'proteins' do
   pod 'SVProgressHUD'
   pod 'FacebookCore'
   pod 'FacebookLogin'
-  pod 'FacebookShare'
 end

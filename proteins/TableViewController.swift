@@ -196,7 +196,7 @@ extension TableViewController {
         endNode.position = positionEnd
         
         let zAxisNode = SCNNode()
-        zAxisNode.eulerAngles.x = Float(CGFloat(M_PI_2))
+        zAxisNode.eulerAngles.x = Float(CGFloat(Double.pi / 2))
         
         let cylinderGeometry = SCNCylinder(radius: radius, height: height)
         cylinderGeometry.firstMaterial?.diffuse.contents = color

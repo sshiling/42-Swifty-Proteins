@@ -8,8 +8,6 @@
 
 import UIKit
 import LocalAuthentication
-import FacebookLogin
-import FacebookCore
 import FBSDKCoreKit
 import FBSDKLoginKit
 
@@ -76,10 +74,6 @@ class ViewController: UIViewController {
         }
     }
     
-
-    
-    @IBOutlet weak var button: UIButton!
-    
     @IBAction func authWithTouchID(_ sender: Any) {
         loginView.text = ""
         passwordView.text = ""
@@ -107,27 +101,6 @@ class ViewController: UIViewController {
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()   
-        
-        button.isHidden = true
-    
-        // check if Touch ID is available
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            button.isHidden = false
-        }
-        
-        let fileURLProject = Bundle.main.path(forResource: "ligands", ofType: "txt")
-        var readStringProject = ""
-        
-        do {
-            readStringProject = try String(contentsOfFile: fileURLProject!, encoding: String.Encoding.utf8)
-        } catch let error as NSError {
-            print("Failed reading from URL: \(String(describing: fileURLProject)), Error: " + error.localizedDescription)
-        }
-        proteinsArr = readStringProject.components(separatedBy: "\n").filter({!$0.isEmpty})
     }
 
     override func didReceiveMemoryWarning() {

@@ -22,7 +22,7 @@
 
 + (void)initStore;
 
-+ (void)setUserDataAndHash:(NSDictionary *)ud;
++ (void)setUserDataAndHash:(NSDictionary *_Nullable)ud;
 
 + (void)setUserDataAndHash:(nullable NSString *)email
                  firstName:(nullable NSString *)firstName
@@ -35,6 +35,6 @@
                        zip:(nullable NSString *)zip
                    country:(nullable NSString *)country;
 
-+ (NSString *) getHashedUserData;
++ (NSString *_Nullable) getHashedUserData;
 
 @end

@@ -17,16 +17,9 @@ PODS:
     - FacebookCore (~> 0.5)
     - FBSDKCoreKit (~> 4.37)
     - FBSDKLoginKit (~> 4.37)
-  - FacebookShare (0.5.0):
-    - Bolts (~> 1.9)
-    - FacebookCore (~> 0.5)
-    - FBSDKCoreKit (~> 4.37)
-    - FBSDKShareKit (~> 4.37)
   - FBSDKCoreKit (4.38.1):
     - Bolts (~> 1.9)
   - FBSDKLoginKit (4.38.1):
-    - FBSDKCoreKit
-  - FBSDKShareKit (4.38.1):
     - FBSDKCoreKit
   - SVProgressHUD (2.2.5)
   - SwiftyJSON (4.2.0)
@@ -36,7 +29,6 @@ DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - FacebookCore
   - FacebookLogin
-  - FacebookShare
   - SVProgressHUD
   - SwiftyJSON
 
@@ -46,10 +38,8 @@ SPEC REPOS:
     - Bolts
     - FacebookCore
     - FacebookLogin
-    - FacebookShare
     - FBSDKCoreKit
     - FBSDKLoginKit
-    - FBSDKShareKit
     - SVProgressHUD
     - SwiftyJSON
 
@@ -68,13 +58,11 @@ SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   FacebookCore: 74288d0add931d361b1596beae787ab72c438249
   FacebookLogin: ebcf34714a1cb9f0759d9f071cfb01ed500996cf
-  FacebookShare: 963b4bb1124a64a395b1e428163d70b5774116e8
   FBSDKCoreKit: 8d47857400e2f5bdea697a80daff882e91c84ef6
   FBSDKLoginKit: 4621c690d9dd8628031a4791497062183ea34b0d
-  FBSDKShareKit: 6ffe22f0a0618eb7424d4104ab0ef3ce9643d42a
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 4eee4f7eb545e673e10f52c6f6495676cd060573
+PODFILE CHECKSUM: 51e3d8b345d85ab381c25d5d024fdcedea66557e
 
 COCOAPODS: 1.5.3
