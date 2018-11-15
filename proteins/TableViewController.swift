@@ -17,6 +17,7 @@ import ChameleonFramework
 
 class TableViewController: UITableViewController {
     
+    var destTitle = String()
     var names: [String] = []
     var filteredNames: [String] = []
     var allAtoms: [SCNNode] = []
@@ -24,8 +25,12 @@ class TableViewController: UITableViewController {
     
     lazy var searchBar:UISearchBar = UISearchBar()
     
+    @IBOutlet weak var randBtn: UIBarButtonItem!
+    
     @IBAction func randProtein(_ sender: UIBarButtonItem) {
+        
         if filteredNames.count != 0 {
+            randBtn.isEnabled = false
             getPDBDataAndShowProtein(proteinIndex: Int(arc4random_uniform(UInt32(filteredNames.count))))
         } else {
             let alert = UIAlertController(title: "There are no elements to choose from", message: "Please, change your search request or clear search field", preferredStyle: UIAlertControllerStyle.alert)
@@ -64,10 +69,8 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
-        
-//        cell.backgroundColor = UIColor(white: 1, alpha: 0.5)
-        
         cell.backgroundColor = UIColor.clear
         cell.ligoldName.text = filteredNames[indexPath.row]
         cell.ligoldName.textColor = UIColor.white
@@ -75,16 +78,13 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.isUserInteractionEnabled = false
         
+        tableView.isUserInteractionEnabled = false
         getPDBDataAndShowProtein(proteinIndex: indexPath.row)
     }
     
     func getPDBDataAndShowProtein(proteinIndex index: Int) {
-        
-//        print ("Index: \(index). Protein name: \(filteredNames[index])")
-//        for name in 0...(filteredNames.count - 1) { print ("\(name) \(filteredNames[name])") }
-        
+
         SVProgressHUD.show()
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -116,7 +116,9 @@ class TableViewController: UITableViewController {
                             self.allCoords.append(coordinates)
                         }
                     }
+                    self.destTitle = self.filteredNames[index]
                     self.performSegue(withIdentifier: "goToScene", sender: self)
+                    self.randBtn.isEnabled = true
                     self.tableView.isUserInteractionEnabled = true
                 } catch {
                     SVProgressHUD.dismiss()
@@ -130,11 +132,12 @@ class TableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToScene" {
             let destinationVC = segue.destination as! SceneViewController
+            
+            destinationVC.title = destTitle
             let scene = SCNScene()
             var alreadyUsedAtoms = [(x: Float, y: Float, z: Float)]()
             
             scene.rootNode.addChildNode(SCNNode())
-            scene.rootNode.name = "Test"
             for node in allAtoms {
                 scene.rootNode.addChildNode(node)
             }
@@ -143,7 +146,7 @@ class TableViewController: UITableViewController {
                 alreadyUsedAtoms.append(from)
                 for cord in 1...atom.count - 1 {
                     if !checkIfAlreadyUsed(atomsArray: alreadyUsedAtoms, toSearch: atom[cord]) {
-                        let celinder = makeCylinder(positionStart: SCNVector3(from.x, from.y, from.z), positionEnd: SCNVector3([atom[cord].x, atom[cord].y, atom[cord].z]), radius: 0.1, color: UIColor.black, transparency: 0.1)
+                        let celinder = makeCylinder(positionStart: SCNVector3(from.x, from.y, from.z), positionEnd: SCNVector3([atom[cord].x, atom[cord].y, atom[cord].z]), radius: 0.1, color: UIColor.flatGrayDark, transparency: 0.1)
                         scene.rootNode.addChildNode(celinder)
                     }
                 }
@@ -204,44 +207,34 @@ extension TableViewController {
         
         let returnNode = SCNNode()
         
-        if (positionStart.x > 0.0 && positionStart.y < 0.0 && positionStart.z < 0.0 && positionEnd.x > 0.0 && positionEnd.y < 0.0 && positionEnd.z > 0.0)
-        {
+        if (positionStart.x > 0.0 && positionStart.y < 0.0 && positionStart.z < 0.0 && positionEnd.x > 0.0 && positionEnd.y < 0.0 && positionEnd.z > 0.0){
             endNode.addChildNode(zAxisNode)
             endNode.constraints = [ SCNLookAtConstraint(target: startNode) ]
             returnNode.addChildNode(endNode)
-            
         }
-        else if (positionStart.x < 0.0 && positionStart.y < 0.0 && positionStart.z < 0.0 && positionEnd.x < 0.0 && positionEnd.y < 0.0 && positionEnd.z > 0.0)
-        {
+        else if (positionStart.x < 0.0 && positionStart.y < 0.0 && positionStart.z < 0.0 && positionEnd.x < 0.0 && positionEnd.y < 0.0 && positionEnd.z > 0.0){
             endNode.addChildNode(zAxisNode)
             endNode.constraints = [ SCNLookAtConstraint(target: startNode) ]
             returnNode.addChildNode(endNode)
-            
         }
-        else if (positionStart.x < 0.0 && positionStart.y > 0.0 && positionStart.z < 0.0 && positionEnd.x < 0.0 && positionEnd.y > 0.0 && positionEnd.z > 0.0)
-        {
+        else if (positionStart.x < 0.0 && positionStart.y > 0.0 && positionStart.z < 0.0 && positionEnd.x < 0.0 && positionEnd.y > 0.0 && positionEnd.z > 0.0){
             endNode.addChildNode(zAxisNode)
             endNode.constraints = [ SCNLookAtConstraint(target: startNode) ]
             returnNode.addChildNode(endNode)
-            
         }
-        else if (positionStart.x > 0.0 && positionStart.y > 0.0 && positionStart.z < 0.0 && positionEnd.x > 0.0 && positionEnd.y > 0.0 && positionEnd.z > 0.0)
-        {
+        else if (positionStart.x > 0.0 && positionStart.y > 0.0 && positionStart.z < 0.0 && positionEnd.x > 0.0 && positionEnd.y > 0.0 && positionEnd.z > 0.0){
             endNode.addChildNode(zAxisNode)
             endNode.constraints = [ SCNLookAtConstraint(target: startNode) ]
             returnNode.addChildNode(endNode)
-            
         }
-        else
-        {
+        else{
             startNode.addChildNode(zAxisNode)
             startNode.constraints = [ SCNLookAtConstraint(target: endNode) ]
             returnNode.addChildNode(startNode)
         }
-        
+    
         return returnNode
     }
-
 }
 
 

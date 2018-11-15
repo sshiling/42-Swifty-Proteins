@@ -54,6 +54,7 @@ class Atom {
         let Atom = SCNSphere(radius: 0.3)
         Atom.firstMaterial!.diffuse.contents = self.color
         Atom.firstMaterial!.specular.contents = UIColor.white
+        
         let atomScene = SCNNode(geometry: Atom)
         atomScene.position = SCNVector3Make(x, y, z)
         atomScene.name = self.atomName

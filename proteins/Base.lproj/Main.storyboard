@@ -182,6 +182,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="randBtn" destination="MXh-M8-cmh" id="nrT-7K-h4q"/>
                         <segue destination="3OO-TX-Whi" kind="show" identifier="goToScene" id="6qC-MD-NoH"/>
                     </connections>
                 </tableViewController>
@@ -265,6 +266,7 @@
                         <outlet property="name" destination="s9G-7M-30b" id="UBD-pS-2Xd"/>
                         <outlet property="pinch" destination="JQ8-op-kWt" id="6Vj-fi-Cqv"/>
                         <outlet property="sceneView" destination="iOT-CH-KSf" id="ekb-FM-jJI"/>
+                        <outlet property="shareBtn" destination="FdK-mq-CKb" id="I5R-8y-bkI"/>
                         <outlet property="tap" destination="dQg-4l-IKD" id="OIU-fU-Q0e"/>
                     </connections>
                 </viewController>
