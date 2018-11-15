@@ -182,6 +182,7 @@
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="JQ8-op-kWt" appends="YES" id="FD5-mU-4TK"/>
+                                    <outletCollection property="gestureRecognizers" destination="dQg-4l-IKD" appends="YES" id="jzU-kR-Sao"/>
                                 </connections>
                             </sceneKitView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9G-7M-30b">
@@ -211,11 +212,13 @@
                     <connections>
                         <outlet property="pinch" destination="JQ8-op-kWt" id="6Vj-fi-Cqv"/>
                         <outlet property="sceneView" destination="iOT-CH-KSf" id="ekb-FM-jJI"/>
+                        <outlet property="tap" destination="dQg-4l-IKD" id="OIU-fU-Q0e"/>
                         <outlet property="test" destination="s9G-7M-30b" id="rdu-70-R8w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7xS-tz-3sP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <pinchGestureRecognizer id="JQ8-op-kWt"/>
+                <tapGestureRecognizer id="dQg-4l-IKD"/>
             </objects>
             <point key="canvasLocation" x="1348" y="27"/>
         </scene>

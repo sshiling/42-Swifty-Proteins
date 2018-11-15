@@ -14,11 +14,15 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var test: UILabel!
     @IBOutlet weak var sceneView: SCNView!
     
+    @IBOutlet var tap: UITapGestureRecognizer!
     @IBOutlet var pinch: UIPinchGestureRecognizer!
+    
     var sceneData: [SCNNode] = []
     var cordData = [[(x: Float, y: Float, z: Float)]]()
     var alreadyUsedAtoms = [(x: Float, y: Float, z: Float)]()
     var previousScale:CGFloat = 1.0
+    var hittedObj  =  SCNNode()
+    var oldColor  = UIColor()
     
     @IBAction func shareImage(_ sender: Any) {
         let bounds = UIScreen.main.bounds
@@ -37,6 +41,8 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
         // TAP Gesture
         pinch.delegate = self
         view.addGestureRecognizer(pinch)
+        sceneView.addGestureRecognizer(tap)
+        tap.delegate = self
         sceneView.backgroundColor = UIColor.white
         sceneView.allowsCameraControl = true
         sceneView.autoenablesDefaultLighting = true
@@ -67,6 +73,23 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
         scene.rootNode.addChildNode(cameraNode)
         
         sceneView.scene = scene
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first!
+        let location = touch.location(in: sceneView)
+        hittedObj.geometry?.firstMaterial?.emission.contents = oldColor
+        let hitList = sceneView.hitTest(location, options: nil)
+        if let hitObject = hitList.first {
+            print(hitObject.node)
+            test.text = hitObject.node.name
+            hittedObj = hitObject.node
+            oldColor = hitObject.node.geometry?.firstMaterial?.emission.contents as! UIColor
+            hitObject.node.geometry?.firstMaterial?.emission.contents = UIColor.yellow
+        }
+        else {
+            test.text = nil
+        }
     }
     
     @IBAction func scalePiece(_ gestureRecognizer : UIPinchGestureRecognizer) {   guard gestureRecognizer.view != nil else { return }

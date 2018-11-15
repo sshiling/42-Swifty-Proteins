@@ -13,6 +13,7 @@
 		78372AC5219B0B3400690E2C /* ligands.txt in Resources */ = {isa = PBXBuildFile; fileRef = 78372AC4219B0B3400690E2C /* ligands.txt */; };
 		78372AC7219B0D1000690E2C /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78372AC6219B0D1000690E2C /* TableViewController.swift */; };
 		78372AC9219B1A9700690E2C /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78372AC8219B1A9700690E2C /* TableViewCell.swift */; };
+		78A69097219DC5090086241B /* PeriodicTableJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 78A69096219DC5090086241B /* PeriodicTableJSON.json */; };
 		9B02D7DD219ADDB500445622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02D7DC219ADDB500445622 /* AppDelegate.swift */; };
 		9B02D7DF219ADDB500445622 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02D7DE219ADDB500445622 /* ViewController.swift */; };
 		9B02D7E2219ADDB500445622 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B02D7E0219ADDB500445622 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 		78372AC4219B0B3400690E2C /* ligands.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ligands.txt; sourceTree = SOURCE_ROOT; };
 		78372AC6219B0D1000690E2C /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		78372AC8219B1A9700690E2C /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		78A69096219DC5090086241B /* PeriodicTableJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = PeriodicTableJSON.json; path = "../../Periodic-Table-JSON/PeriodicTableJSON.json"; sourceTree = "<group>"; };
 		838339202F2E45A7A2E87396 /* Pods_proteins.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_proteins.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B02D7D9219ADDB500445622 /* proteins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = proteins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B02D7DC219ADDB500445622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 		9B02D7DB219ADDB500445622 /* proteins */ = {
 			isa = PBXGroup;
 			children = (
+				78A69096219DC5090086241B /* PeriodicTableJSON.json */,
 				780852D1219C39AC002C206F /* Atom.swift */,
 				9B02D7DC219ADDB500445622 /* AppDelegate.swift */,
 				9B02D7DE219ADDB500445622 /* ViewController.swift */,
@@ -169,6 +172,7 @@
 			files = (
 				9B02D7EA219ADDB500445622 /* LaunchScreen.storyboard in Resources */,
 				9B02D7E7219ADDB500445622 /* Assets.xcassets in Resources */,
+				78A69097219DC5090086241B /* PeriodicTableJSON.json in Resources */,
 				9B02D7E2219ADDB500445622 /* Main.storyboard in Resources */,
 				78372AC5219B0B3400690E2C /* ligands.txt in Resources */,
 			);
