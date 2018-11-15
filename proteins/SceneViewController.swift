@@ -9,7 +9,7 @@
 import UIKit
 import SceneKit
 
-class SceneViewController: UIViewController {
+class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var test: UILabel!
     @IBOutlet weak var sceneView: SCNView!
@@ -17,6 +17,7 @@ class SceneViewController: UIViewController {
     var sceneData: [SCNNode] = []
     var cordData = [[(x: Float, y: Float, z: Float)]]()
     var alreadyUsedAtoms = [(x: Float, y: Float, z: Float)]()
+    var previousScale:CGFloat = 1.0
     
     @IBAction func shareImage(_ sender: Any) {
         let bounds = UIScreen.main.bounds
@@ -32,6 +33,10 @@ class SceneViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // TAP Gesture
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector(("handleTap:")))
+        gestureRecognizer.delegate = self
+        view.addGestureRecognizer(gestureRecognizer)
         sceneView.backgroundColor = UIColor.white
         sceneView.allowsCameraControl = true
         sceneView.autoenablesDefaultLighting = true
@@ -55,6 +60,13 @@ class SceneViewController: UIViewController {
             }
         }
         sceneView.scene = scene
+    }
+    
+    func pinchAction(sender:UIPinchGestureRecognizer) {
+        let scale:CGFloat = previousScale * sender.scale
+        self.view.transform = CGAffineTransform(scaleX: scale, y: scale);
+        
+        previousScale = sender.scale
     }
     
     func checkIfAlreadyUsed(atomsArray: [(x: Float, y: Float, z: Float)], toSearch: (x: Float, y: Float, z: Float)) -> Bool {
