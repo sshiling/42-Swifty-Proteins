@@ -50,7 +50,7 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
 
         print(cordData.count)
         for atom in cordData {
-            var from = atom[0]
+            let from = atom[0]
             alreadyUsedAtoms.append(from)
             print(atom)
             for cord in 1...atom.count - 1 {
@@ -60,6 +60,12 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
                 }
             }
         }
+        
+        let cameraNode = SCNNode()
+        cameraNode.camera = SCNCamera()
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 42)
+        scene.rootNode.addChildNode(cameraNode)
+        
         sceneView.scene = scene
     }
     
