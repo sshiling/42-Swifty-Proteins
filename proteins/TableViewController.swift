@@ -39,6 +39,12 @@ class TableViewController: UITableViewController {
         searchBar.backgroundImage = UIImage()
         searchBar.delegate = self
         navigationItem.titleView = searchBar
+
+        let backgroundView = UIImageView(image: #imageLiteral(resourceName: "bg"))
+        backgroundView.contentMode = .scaleAspectFill
+        self.tableView.backgroundView = backgroundView
+        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,9 +58,12 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
-        if !filteredNames[indexPath.row].isEmpty {
-            cell.ligoldName.text = filteredNames[indexPath.row]
-        }
+        
+//        cell.backgroundColor = UIColor(white: 1, alpha: 0.5)
+        
+        cell.backgroundColor = UIColor.clear
+        cell.ligoldName.text = filteredNames[indexPath.row]
+        cell.ligoldName.textColor = UIColor.white
         return cell
     }
     
