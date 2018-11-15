@@ -47,7 +47,7 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         SVProgressHUD.show()
-        
+        tableView.isUserInteractionEnabled = false
         allAtoms = []
         allCoords = []
         
@@ -87,8 +87,10 @@ class TableViewController: UITableViewController {
                     }
                     SVProgressHUD.dismiss()
                     self.performSegue(withIdentifier: "goToScene", sender: self)
+                    self.tableView.isUserInteractionEnabled = true
                 } catch {
                     SVProgressHUD.dismiss()
+                    self.tableView.isUserInteractionEnabled = true
                     print(error)
                 }
             }

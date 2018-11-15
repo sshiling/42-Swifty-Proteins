@@ -29,6 +29,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var button: UIButton!
     
     @IBAction func authWithTouchID(_ sender: Any) {
+        self.button.isEnabled = false
         let reason = "Authenticate with Touch ID"
         loginView.text = ""
         passwordView.text = ""
@@ -39,10 +40,13 @@ class ViewController: UIViewController {
                 if succes {
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "goToTableView", sender: self)
+                        self.button.isEnabled = true
                     }
+                    
                 }
                 else {
                     self.showAlertController("Touch ID Authentication Failed")
+                    self.button.isEnabled = true
                 }
             })
     }

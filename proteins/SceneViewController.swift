@@ -14,6 +14,7 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var test: UILabel!
     @IBOutlet weak var sceneView: SCNView!
     
+    @IBOutlet var pinch: UIPinchGestureRecognizer!
     var sceneData: [SCNNode] = []
     var cordData = [[(x: Float, y: Float, z: Float)]]()
     var alreadyUsedAtoms = [(x: Float, y: Float, z: Float)]()
@@ -34,13 +35,13 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // TAP Gesture
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector(("handleTap:")))
-        gestureRecognizer.delegate = self
-        view.addGestureRecognizer(gestureRecognizer)
+        pinch.delegate = self
+        view.addGestureRecognizer(pinch)
         sceneView.backgroundColor = UIColor.white
         sceneView.allowsCameraControl = true
         sceneView.autoenablesDefaultLighting = true
         let scene = SCNScene()
+        
         scene.rootNode.addChildNode(SCNNode())
         scene.rootNode.name = "Test"
         for node in sceneData {
@@ -62,12 +63,13 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
         sceneView.scene = scene
     }
     
-    func pinchAction(sender:UIPinchGestureRecognizer) {
-        let scale:CGFloat = previousScale * sender.scale
-        self.view.transform = CGAffineTransform(scaleX: scale, y: scale);
+    @IBAction func scalePiece(_ gestureRecognizer : UIPinchGestureRecognizer) {   guard gestureRecognizer.view != nil else { return }
         
-        previousScale = sender.scale
-    }
+        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+            gestureRecognizer.view?.transform = (gestureRecognizer.view?.transform.scaledBy(x: gestureRecognizer.scale, y: gestureRecognizer.scale))!
+            gestureRecognizer.scale = 1.0
+        }}
+
     
     func checkIfAlreadyUsed(atomsArray: [(x: Float, y: Float, z: Float)], toSearch: (x: Float, y: Float, z: Float)) -> Bool {
         let (x1, x2, x3) = toSearch
