@@ -8,10 +8,15 @@
 
 import UIKit
 import SceneKit
+import SwiftyJSON
 
 class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
 
-    @IBOutlet weak var test: UILabel!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var melt: UILabel!
+    @IBOutlet weak var boil: UILabel!
+    @IBOutlet weak var mass: UILabel!
+    @IBOutlet weak var descript: UILabel!
     @IBOutlet weak var sceneView: SCNView!
     
     @IBOutlet var tap: UITapGestureRecognizer!
@@ -21,6 +26,7 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
     var previousScale:CGFloat = 1.0
     var hittedObj  =  SCNNode()
     var oldColor  = UIColor()
+    var descData: [AtomDescription] = []
     
     @IBAction func shareImage(_ sender: Any) {
         let bounds = UIScreen.main.bounds
@@ -50,6 +56,17 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
         cameraNode.position = SCNVector3(x: 0, y: 0, z: 35)
         scene.rootNode.addChildNode(cameraNode)
         sceneView.scene = scene
+        if let path = Bundle.main.path(forResource: "PeriodicTableJSON", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let json = JSON(data)
+                for i in json["elements"]{
+                    let atomDescription = AtomDescription(json: i.1)
+                    descData.append(atomDescription)
+                }
+            } catch {
+            }
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -59,13 +76,31 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
         let hitList = sceneView.hitTest(location, options: nil)
         if let hitObject = hitList.first {
             print(hitObject.node)
-            test.text = hitObject.node.name
+            for currAtom in descData{
+                if currAtom.symb == hitObject.node.name
+                {
+                    melt.text = "no value"
+                    boil.text = "no value"
+                    name.text = currAtom.name ?? "not set"
+                    if let temp = currAtom.melt{
+                        melt.text = String(describing: temp)
+                    }
+                    if let temp = currAtom.boil{
+                        boil.text = String(describing: temp)
+                    }
+                    if let temp = currAtom.atomic_mass{
+                        mass.text = String(describing: temp)
+                    }
+                    descript.text = currAtom.summary
+                }
+            }
             hittedObj = hitObject.node
             oldColor = hitObject.node.geometry?.firstMaterial?.emission.contents as! UIColor
             hitObject.node.geometry?.firstMaterial?.emission.contents = UIColor.yellow
+            
         }
         else {
-            test.text = nil
+            name.text = nil
         }
     }
     
@@ -78,7 +113,6 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        test.text = "hello"
     }
 }
 
