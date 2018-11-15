@@ -74,8 +74,7 @@ class ViewController: UIViewController {
         } catch let error as NSError {
             print("Failed reading from URL: \(String(describing: fileURLProject)), Error: " + error.localizedDescription)
         }
-        proteinsArr = readStringProject.components(separatedBy: "\n")
-//        print(proteinsArr.count)
+        proteinsArr = readStringProject.components(separatedBy: "\n").filter({!$0.isEmpty})
     }
 
     override func didReceiveMemoryWarning() {

@@ -65,6 +65,10 @@ class TableViewController: UITableViewController {
     }
     
     func getPDBDataAndShowProtein(proteinIndex index: Int) {
+        
+//        print ("Index: \(index). Protein name: \(filteredNames[index])")
+//        for name in 0...(filteredNames.count - 1) { print ("\(name) \(filteredNames[name])") }
+        
         SVProgressHUD.show()
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
