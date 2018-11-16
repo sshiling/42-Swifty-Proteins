@@ -47,9 +47,19 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         let activityViewController = UIActivityViewController(activityItems: [img!], applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [.addToReadingList, .airDrop, .copyToPasteboard, .mail, .assignToContact]
         activityViewController.popoverPresentationController?.sourceView = self.view
         self.present(activityViewController, animated: true, completion: nil)
         shareBtn.isEnabled = true
+        activityViewController.completionWithItemsHandler = { activity, completed, items, error in
+            if completed {
+                self.showAlertController("Your photo was uploaded successfully")
+            }
+            else {
+               self.showAlertController("Opps..Something going wrong")
+            }
+            
+        }
     }
     
     @IBAction func scalePiece(_ gestureRecognizer : UIPinchGestureRecognizer) {   guard gestureRecognizer.view != nil else { return }
@@ -132,6 +142,12 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
                 }
             } catch {}
         }
+    }
+    
+    func showAlertController(_ message: String) {
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
 }
 
