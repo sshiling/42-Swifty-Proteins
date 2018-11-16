@@ -53,9 +53,11 @@ class TableViewController: UITableViewController {
         searchBar.isTranslucent = false
         searchBar.backgroundImage = UIImage()
         searchBar.delegate = self
+        searchBar.tintColor = UIColor.darkGray
+        
         navigationItem.titleView = searchBar
 
-        let backgroundView = UIImageView(image: #imageLiteral(resourceName: "bg"))
+        let backgroundView = UIImageView(image: #imageLiteral(resourceName: "gray_bg"))
         backgroundView.contentMode = .scaleAspectFill
         self.tableView.backgroundView = backgroundView
         self.tableView.separatorStyle = .none

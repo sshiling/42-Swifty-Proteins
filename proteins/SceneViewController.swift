@@ -31,10 +31,6 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationController?.navigationBar.isTranslucent = true
-//        self.navigationController?.view.backgroundColor = .clear
         initScene()
         getAtomDescription()
     }
@@ -55,7 +51,10 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
         let activityViewController = UIActivityViewController(activityItems: [img!], applicationActivities: nil)
         activityViewController.excludedActivityTypes = [.addToReadingList, .airDrop, .copyToPasteboard, .mail, .assignToContact]
         activityViewController.popoverPresentationController?.sourceView = self.view
-        self.present(activityViewController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.present(activityViewController, animated: true, completion: nil)
+            self.present(activityViewController, animated: true, completion: nil)
+        }
         shareBtn.isEnabled = true
         SVProgressHUD.dismiss()
         activityViewController.completionWithItemsHandler = { activity, completed, items, error in
@@ -141,7 +140,9 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
         cameraNode.camera = SCNCamera()
         cameraNode.position = SCNVector3(x: 0, y: 0, z: 35)
         
-        scene.background.contents = UIImage(named: "bg.jpg")
+        scene.background.contents = UIColor(red: 60/255, green: 75/255, blue: 90/255, alpha: 1)
+//        scene.background.contents = UIImage(named: "bg.jpg")
+//        scene.background.contents.contentMode = .scaleAspectFill
         scene.rootNode.addChildNode(cameraNode)
         sceneView.scene = scene
     }
