@@ -80,23 +80,25 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
         let hitList = sceneView.hitTest(location, options: nil)
         if let hitObject = hitList.first {
             for currAtom in descData{
-                if currAtom.symb == hitObject.node.name {
+                if currAtom.symb?.lowercased() == hitObject.node.name?.lowercased() {
                     
-                    melt.text = "no value specified"
-                    boil.text = "no value specified"
-                    name.text = "no value specified"
-                    descript.text = "no value specified"
-                    mass.text = "no value specified"
+                    melt.text = "Melting point: --"
+                    boil.text = "Boiling point: --"
+                    name.text = "Full Name: --"
+                    descript.text = "--"
+                    mass.text = "Atomic mass: --"
                     
-                    name.text = currAtom.name
                     if let temp = currAtom.melt {
-                        melt.text = String(describing: temp)
+                        melt.text = "Melting point: \(String(describing: temp))°C"
+                    }
+                    if let temp = currAtom.name {
+                        name.text = "Full Name: \(temp)"
                     }
                     if let temp = currAtom.boil {
-                        boil.text = String(describing: temp)
+                         boil.text = "Boiling point: \(String(describing: temp))°C"
                     }
                     if let temp = currAtom.atomic_mass {
-                        mass.text = String(describing: temp)
+                        mass.text = "Atomic mass: \(String(describing: temp))"
                     }
                     descript.text = currAtom.summary
                 }
@@ -115,6 +117,12 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func initScene(){
         
+        melt.text = nil
+        boil.text = nil
+        name.text = nil
+        descript.text = nil
+        mass.text = nil
+        
         tap.delegate = self
         pinch.delegate = self
         view.addGestureRecognizer(pinch)
@@ -129,6 +137,7 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
         cameraNode.camera = SCNCamera()
         cameraNode.position = SCNVector3(x: 0, y: 0, z: 35)
         
+        scene.background.contents = UIImage(named: "bg.jpg")
         scene.rootNode.addChildNode(cameraNode)
         sceneView.scene = scene
     }

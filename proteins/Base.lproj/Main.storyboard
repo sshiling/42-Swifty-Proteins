@@ -10,6 +10,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Futura.ttc">
+            <string>Futura-MediumItalic</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="PiJ-L2-dqe">
@@ -206,48 +211,69 @@
                                     <outletCollection property="gestureRecognizers" destination="dQg-4l-IKD" appends="YES" id="jzU-kR-Sao"/>
                                 </connections>
                             </sceneKitView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="td8-pA-Dk3">
-                                <rect key="frame" x="175" y="539" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exx-A4-hxF">
-                                <rect key="frame" x="253" y="156" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xm-F8-tK2">
-                                <rect key="frame" x="38" y="157" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9G-7M-30b">
-                                <rect key="frame" x="152" y="124" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hct-6O-d4p">
-                                <rect key="frame" x="38" y="215" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="7Dl-tQ-RkB">
+                                <rect key="frame" x="10" y="94" width="355" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ptG-Na-USI">
+                                        <rect key="frame" x="0.0" y="0.0" width="177.5" height="47"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xm-F8-tK2">
+                                                <rect key="frame" x="0.0" y="0.0" width="39.5" height="21"/>
+                                                <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hct-6O-d4p">
+                                                <rect key="frame" x="0.0" y="26" width="39.5" height="21"/>
+                                                <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="m1Y-zV-S2U">
+                                        <rect key="frame" x="177.5" y="0.0" width="177.5" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9G-7M-30b">
+                                                <rect key="frame" x="0.0" y="0.0" width="42" height="22.5"/>
+                                                <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exx-A4-hxF">
+                                                <rect key="frame" x="0.0" y="27.5" width="42" height="22.5"/>
+                                                <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.31208282177470342" green="0.50878183712450253" blue="0.55630667098445596" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="m1Y-zV-S2U" firstAttribute="width" secondItem="ptG-Na-USI" secondAttribute="width" id="dC8-Bp-zIW"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="td8-pA-Dk3">
+                                <rect key="frame" x="10" y="639.5" width="355" height="22.5"/>
+                                <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="td8-pA-Dk3" firstAttribute="leading" secondItem="Hhe-QT-My9" secondAttribute="leading" constant="10" id="BE9-zj-0kA"/>
                             <constraint firstItem="Hhe-QT-My9" firstAttribute="bottom" secondItem="iOT-CH-KSf" secondAttribute="bottom" id="BOd-hF-73E"/>
+                            <constraint firstItem="Hhe-QT-My9" firstAttribute="trailing" secondItem="td8-pA-Dk3" secondAttribute="trailing" constant="10" id="C6V-hP-7ri"/>
+                            <constraint firstItem="7Dl-tQ-RkB" firstAttribute="leading" secondItem="Hhe-QT-My9" secondAttribute="leading" constant="10" id="IYt-CO-iK9"/>
                             <constraint firstItem="Hhe-QT-My9" firstAttribute="trailing" secondItem="iOT-CH-KSf" secondAttribute="trailing" id="aog-FV-KtN"/>
+                            <constraint firstItem="td8-pA-Dk3" firstAttribute="centerX" secondItem="iOT-CH-KSf" secondAttribute="centerX" id="cNw-Ew-cou"/>
                             <constraint firstItem="iOT-CH-KSf" firstAttribute="leading" secondItem="Hhe-QT-My9" secondAttribute="leading" id="jfm-Q1-lhq"/>
                             <constraint firstItem="iOT-CH-KSf" firstAttribute="top" secondItem="Hhe-QT-My9" secondAttribute="top" id="mPD-NP-Q3u"/>
+                            <constraint firstItem="7Dl-tQ-RkB" firstAttribute="top" secondItem="Hhe-QT-My9" secondAttribute="top" constant="30" id="uFe-rj-DAM"/>
+                            <constraint firstItem="Hhe-QT-My9" firstAttribute="bottom" secondItem="td8-pA-Dk3" secondAttribute="bottom" constant="5" id="uQH-n1-JCN"/>
+                            <constraint firstItem="Hhe-QT-My9" firstAttribute="trailing" secondItem="7Dl-tQ-RkB" secondAttribute="trailing" constant="10" id="zUc-Pm-qwY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Hhe-QT-My9"/>
                     </view>
