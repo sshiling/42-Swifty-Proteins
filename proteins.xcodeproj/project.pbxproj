@@ -21,6 +21,7 @@
 		9B02D7E7219ADDB500445622 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B02D7E6219ADDB500445622 /* Assets.xcassets */; };
 		9B02D7EA219ADDB500445622 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B02D7E8219ADDB500445622 /* LaunchScreen.storyboard */; };
 		9B8E89AF219DC7B40076B5A6 /* PeriodicTableJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B8E89AE219DC7B30076B5A6 /* PeriodicTableJSON.json */; };
+		9BE05C95219EFBCD00A11D5B /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE05C94219EFBCD00A11D5B /* NavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		9B02D7EB219ADDB500445622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B8E89AE219DC7B30076B5A6 /* PeriodicTableJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PeriodicTableJSON.json; sourceTree = "<group>"; };
 		9B8E89B0219DEE270076B5A6 /* proteins-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "proteins-Bridging-Header.h"; sourceTree = "<group>"; };
+		9BE05C94219EFBCD00A11D5B /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		E8FF8AB197A9F17C94681CC3 /* Pods-proteins.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-proteins.debug.xcconfig"; path = "Pods/Target Support Files/Pods-proteins/Pods-proteins.debug.xcconfig"; sourceTree = "<group>"; };
 		F6FFEC8CB4729E6211B40353 /* Pods-proteins.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-proteins.release.xcconfig"; path = "Pods/Target Support Files/Pods-proteins/Pods-proteins.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,6 +93,7 @@
 				78A6909A219DE3970086241B /* AtomDescription.swift */,
 				9B02D7DC219ADDB500445622 /* AppDelegate.swift */,
 				9B02D7DE219ADDB500445622 /* ViewController.swift */,
+				9BE05C94219EFBCD00A11D5B /* NavigationController.swift */,
 				78372AC6219B0D1000690E2C /* TableViewController.swift */,
 				9B02D7E0219ADDB500445622 /* Main.storyboard */,
 				78372AC8219B1A9700690E2C /* TableViewCell.swift */,
@@ -126,6 +129,7 @@
 				9B02D7D6219ADDB500445622 /* Frameworks */,
 				9B02D7D7219ADDB500445622 /* Resources */,
 				3B3FB4985071B08DB9780A34 /* [CP] Embed Pods Frameworks */,
+				1632E26D81B2C42A928EC076 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -187,6 +191,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1632E26D81B2C42A928EC076 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-proteins/Pods-proteins-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-proteins/Pods-proteins-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3B3FB4985071B08DB9780A34 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -201,6 +223,9 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -213,6 +238,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -250,6 +278,7 @@
 				9B02D7E5219ADDB500445622 /* proteins.xcdatamodeld in Sources */,
 				9B02D7DF219ADDB500445622 /* ViewController.swift in Sources */,
 				9B02D7DD219ADDB500445622 /* AppDelegate.swift in Sources */,
+				9BE05C95219EFBCD00A11D5B /* NavigationController.swift in Sources */,
 				780852D2219C39AC002C206F /* Atom.swift in Sources */,
 				78A6909B219DE3970086241B /* AtomDescription.swift in Sources */,
 				78372AC7219B0D1000690E2C /* TableViewController.swift in Sources */,

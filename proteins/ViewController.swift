@@ -10,12 +10,11 @@ import UIKit
 import LocalAuthentication
 import FBSDKCoreKit
 import FBSDKLoginKit
+import GoogleSignIn
 
-class ViewController: UIViewController {
-
-    @IBOutlet weak var loginView: UITextField!
-    @IBOutlet weak var passwordView: UITextField!
+class ViewController: UIViewController, GIDSignInUIDelegate {
     @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var googleBtn: GIDSignInButton!
     
     let context = LAContext()
     var error: NSError?
@@ -24,6 +23,22 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        googleBtn.colorScheme = .dark
+        
+//        self.navigationController!.navigationBar.barStyle = .black
+//        self.navigationController!.navigationBar.isTranslucent = true
+//        self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 1, green: 0.99997437, blue: 0.9999912977, alpha: 1)
+        
+//        self.navigationController?.navigationBar.barTintColor = UIColor(white: 1, alpha: 0.1)
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
+
+        
+//        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .compactPrompt)
+//        self.navigationController!.navigationBar.shadowImage = UIImage()
+//        self.navigationController!.navigationBar.isTranslucent = true
+//        self.navigationController!.view.backgroundColor = .clear
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
         
         button.isHidden = true
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
@@ -38,12 +53,12 @@ class ViewController: UIViewController {
             print("Failed reading from URL: \(String(describing: fileURLProject)), Error: " + error.localizedDescription)
         }
         proteinsArr = readStringProject.components(separatedBy: "\n").filter({!$0.isEmpty})
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.getNotification(_:)),
+                                               name: NSNotification.Name(rawValue: "AuthNotification"), object: nil)
     }
     
     @IBAction func loginButton(_ sender: Any) {
-        
-        loginView.text = ""
-        passwordView.text = ""
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "goToTableView", sender: self)
         }
@@ -63,8 +78,6 @@ class ViewController: UIViewController {
                 if(fbloginresult.grantedPermissions.contains("email"))
                 {
                     // Navigate to other view
-                    self.loginView.text = ""
-                    self.passwordView.text = ""
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "goToTableView", sender: self)
                         FBSDKLoginManager().logOut()
@@ -75,13 +88,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func authWithTouchID(_ sender: Any) {
-        loginView.text = ""
-        passwordView.text = ""
         self.button.isEnabled = false
         
         let reason = "Authenticate with Touch ID"
-        loginView.resignFirstResponder()
-        passwordView.resignFirstResponder()
         context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason, reply:
             {(succes, error) in
                 if succes {
@@ -113,6 +122,18 @@ class ViewController: UIViewController {
             let destinationVC = segue.destination as! TableViewController
             destinationVC.names = proteinsArr
         }
+    }
+    
+    @objc func getNotification(_ notification: NSNotification) {
+        if notification.name.rawValue == "AuthNotification" {
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "goToTableView", sender: self)
+            }
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "AuthNotification"), object: nil)
     }
 }
 

@@ -12,4 +12,6 @@ target 'proteins' do
   pod 'SVProgressHUD'
   pod 'FacebookCore'
   pod 'FacebookLogin'
+  pod 'GoogleSignIn'
+
 end
