@@ -9,6 +9,7 @@
 import UIKit
 import SceneKit
 import SwiftyJSON
+import SVProgressHUD
 
 class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
     
@@ -46,19 +47,20 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.drawHierarchy(in: bounds, afterScreenUpdates: false)
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        SVProgressHUD.show()
         let activityViewController = UIActivityViewController(activityItems: [img!], applicationActivities: nil)
         activityViewController.excludedActivityTypes = [.addToReadingList, .airDrop, .copyToPasteboard, .mail, .assignToContact]
         activityViewController.popoverPresentationController?.sourceView = self.view
         self.present(activityViewController, animated: true, completion: nil)
         shareBtn.isEnabled = true
+        SVProgressHUD.dismiss()
         activityViewController.completionWithItemsHandler = { activity, completed, items, error in
             if completed {
-                self.showAlertController("Your photo was uploaded successfully")
+                self.showAlertController("Your photo was uploaded successfully.")
             }
-            else {
-               self.showAlertController("Opps..Something going wrong")
+             else if error != nil{
+                self.showAlertController("Some error occurred. Please try again.")
             }
-            
         }
     }
     
