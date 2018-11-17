@@ -141,8 +141,6 @@ class SceneViewController: UIViewController, UIGestureRecognizerDelegate {
         cameraNode.position = SCNVector3(x: 0, y: 0, z: 35)
         
         scene.background.contents = UIColor(red: 60/255, green: 75/255, blue: 90/255, alpha: 1)
-//        scene.background.contents = UIImage(named: "bg.jpg")
-//        scene.background.contents.contentMode = .scaleAspectFill
         scene.rootNode.addChildNode(cameraNode)
         sceneView.scene = scene
     }

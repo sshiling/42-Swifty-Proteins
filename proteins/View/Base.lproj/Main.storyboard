@@ -44,16 +44,16 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="foj-lV-6Fz">
-                                <rect key="frame" x="100" y="210" width="175" height="247"/>
+                                <rect key="frame" x="100" y="205" width="175" height="257"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="cbA-0L-4VN">
-                                        <rect key="frame" x="3" y="0.0" width="169" height="35"/>
+                                        <rect key="frame" x="3" y="0.0" width="169" height="45"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lbk-cF-d58">
-                                                <rect key="frame" x="0.0" y="0.0" width="169" height="35"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="169" height="45"/>
                                                 <color key="backgroundColor" red="0.42613375190000002" green="0.78266614680000002" blue="0.58058553930000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="35" id="Ng0-wy-lll"/>
+                                                    <constraint firstAttribute="height" constant="45" id="Ng0-wy-lll"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="169" id="htr-Mf-HbM"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -67,7 +67,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="LJJ-6f-yzb">
-                                        <rect key="frame" x="0.0" y="42" width="175" height="205"/>
+                                        <rect key="frame" x="0.0" y="52" width="175" height="205"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xhV-43-PGZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="175" height="95"/>

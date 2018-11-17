@@ -24,20 +24,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         googleBtn.colorScheme = .dark
-        
-//        self.navigationController!.navigationBar.barStyle = .black
-//        self.navigationController!.navigationBar.isTranslucent = true
-//        self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 1, green: 0.99997437, blue: 0.9999912977, alpha: 1)
-        
-//        self.navigationController?.navigationBar.barTintColor = UIColor(white: 1, alpha: 0.1)
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
-
-        
-//        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .compactPrompt)
-//        self.navigationController!.navigationBar.shadowImage = UIImage()
-//        self.navigationController!.navigationBar.isTranslucent = true
-//        self.navigationController!.view.backgroundColor = .clear
-        
+    
         GIDSignIn.sharedInstance().uiDelegate = self
         
         button.isHidden = true

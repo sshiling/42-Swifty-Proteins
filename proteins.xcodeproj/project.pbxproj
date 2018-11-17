@@ -88,24 +88,48 @@
 		9B02D7DB219ADDB500445622 /* proteins */ = {
 			isa = PBXGroup;
 			children = (
+				9B23224E21A06D570095ADBC /* Model */,
+				9B23224D21A06D3E0095ADBC /* View */,
+				9B23224C21A06D070095ADBC /* Controller */,
 				9B8E89AE219DC7B30076B5A6 /* PeriodicTableJSON.json */,
-				780852D1219C39AC002C206F /* Atom.swift */,
-				78A6909A219DE3970086241B /* AtomDescription.swift */,
 				9B02D7DC219ADDB500445622 /* AppDelegate.swift */,
-				9B02D7DE219ADDB500445622 /* ViewController.swift */,
-				9BE05C94219EFBCD00A11D5B /* NavigationController.swift */,
-				78372AC6219B0D1000690E2C /* TableViewController.swift */,
-				9B02D7E0219ADDB500445622 /* Main.storyboard */,
-				78372AC8219B1A9700690E2C /* TableViewCell.swift */,
-				780852D5219C4E7F002C206F /* SceneViewController.swift */,
 				9B02D7E6219ADDB500445622 /* Assets.xcassets */,
 				78372AC4219B0B3400690E2C /* ligands.txt */,
-				9B02D7E8219ADDB500445622 /* LaunchScreen.storyboard */,
 				9B02D7EB219ADDB500445622 /* Info.plist */,
 				9B02D7E3219ADDB500445622 /* proteins.xcdatamodeld */,
 				9B8E89B0219DEE270076B5A6 /* proteins-Bridging-Header.h */,
 			);
 			path = proteins;
+			sourceTree = "<group>";
+		};
+		9B23224C21A06D070095ADBC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9B02D7DE219ADDB500445622 /* ViewController.swift */,
+				9BE05C94219EFBCD00A11D5B /* NavigationController.swift */,
+				78372AC6219B0D1000690E2C /* TableViewController.swift */,
+				780852D5219C4E7F002C206F /* SceneViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		9B23224D21A06D3E0095ADBC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9B02D7E0219ADDB500445622 /* Main.storyboard */,
+				9B02D7E8219ADDB500445622 /* LaunchScreen.storyboard */,
+				78372AC8219B1A9700690E2C /* TableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9B23224E21A06D570095ADBC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				780852D1219C39AC002C206F /* Atom.swift */,
+				78A6909A219DE3970086241B /* AtomDescription.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A2AFEC54EF33CC401032E55F /* Pods */ = {
