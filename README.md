@@ -1,5 +1,11 @@
 # Swifty Proteins
 
+#### SwiftyProteins is a 3D visualizer for proteins models according to standardized representation from the famous PDB ([Protein Data Bank](https://www.rcsb.org/)) using SceneKit.
+
+In this project I used: rcsb.org, MVC, FBSDKCoreKit, FBSDKLoginKit, GoogleSignIn, Alamofire, SwiftyJSON, SVProgressHUD, ChameleonFramework, SceneKit.
+
+To watch app in work please wait for .gif files upload:
+
 Launch Screen         | Touch ID Success     |  Touch ID Failure
 :--------------------:|:--------------------:|:--------------------|
 ![](launch.gif)       |  ![](touchID_OK.gif) |  ![](touchID_KO.gif)
