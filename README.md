@@ -1,5 +1,9 @@
 # Swifty Proteins
 
+Launch Screen         | Touch ID Success     |  Touch ID Failure
+:--------------------:|:--------------------:|:--------------------|
+![](launch.gif)       |  ![](touchID_OK.gif) |  ![](touchID_KO.gif)
+
 Login Free            | Google Auth          |  Facebook Auth
 :--------------------:|:--------------------:|:--------------------|
 ![](login.gif)        |  ![](google.gif)     |  ![](facebook.gif)
