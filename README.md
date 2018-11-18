@@ -56,3 +56,5 @@ Launchscreen and make sure the launchscreen stays some time so we can appreciate
 
 ### Authors
 I've done this project with my awesome teammate [@oskulska](https://github.com/oskul).
+
+#### More about School 42 and UNIT Factory you can find here: https://en.wikipedia.org/wiki/42_(school)
